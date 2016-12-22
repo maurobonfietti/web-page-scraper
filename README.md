@@ -1,2 +1,4 @@
 # web-page-scraper
-Web Page Scraper.
+
+A web page scraper :-)
+
