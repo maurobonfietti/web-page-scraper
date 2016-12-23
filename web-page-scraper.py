@@ -1,11 +1,18 @@
 #!/usr/bin/python
 
-print("[WEB-PAGE-SCRAPER]")
-print("Coming Soon...")
-
 from urllib2 import urlopen
+from HTMLParser import HTMLParser
+from collections import defaultdict
 
-h = urlopen("http://ordergroove.com/company").read()
+o = defaultdict(int)
+d = "http://ordergroove.com/company"
+h = urlopen(d).read()
 
-print(h)
+class P(HTMLParser):
+    def handle_starttag(self, tag, attrs):
+        o[tag] += 1
 
+parser = P()
+parser.feed(h)
+
+print(o)
