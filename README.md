@@ -2,6 +2,7 @@
 
 A very tiny web page scraper :-)
 
+For a target domain show the most frequently used html elements tags, and their respective counts.
 
 ## INSTALLATION:
 

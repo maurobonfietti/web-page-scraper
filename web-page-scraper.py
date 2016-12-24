@@ -15,4 +15,5 @@ class P(HTMLParser):
 parser = P()
 parser.feed(h)
 
-print(o)
+for t in sorted(o, key=o.get, reverse=True):
+  print t, o[t]
