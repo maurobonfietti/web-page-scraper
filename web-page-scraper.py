@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+    
 from urllib2 import urlopen
 from HTMLParser import HTMLParser
 from collections import defaultdict
@@ -15,5 +15,19 @@ class P(HTMLParser):
 parser = P()
 parser.feed(h)
 
-for t in sorted(o, key=o.get, reverse=True):
+i = 0
+total = 0
+s = sorted(o, key=o.get, reverse=True)
+
+for t in s:
+  total += o[t]
+
+print 'TOTAL HTML ELEMENTS:', total
+
+print 'TOP 5 HTML ELEMENTS:'
+
+for t in s:
   print t, o[t]
+  i += 1
+  if i == 5:
+      break

@@ -2,7 +2,7 @@
 
 A very tiny web page scraper :-)
 
-For a target domain show the most frequently used html elements tags, and their respective counts.
+For a target domain, sum all the html elements and display the top 5 most used, and their respective counts.
 
 ## INSTALLATION:
 
