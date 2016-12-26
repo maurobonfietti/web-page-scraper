@@ -1,8 +1,10 @@
 #!/usr/bin/python
 
-from urllib2 import urlopen
 from HTMLParser import HTMLParser
 from collections import defaultdict
+from urllib2 import urlopen
+
+import time
 
 class Parser(HTMLParser):
     def handle_starttag(self, tag, attrs):
@@ -15,6 +17,7 @@ tags = defaultdict(int)
 print '[Tiny Web Page Scraper]'
 
 domain = raw_input("Enter a target domain, for example: http://ordergroove.com/company ==> ")
+start = time.time()
 
 html = urlopen(domain).read()
 parser = Parser()
@@ -34,3 +37,4 @@ for tag in sorted(tags, key=tags.get, reverse=True):
 print
 print 'Total: %d Html Elements.' % total
 print
+print "Scraped in '%.3f' seconds." % (time.time()-start)
