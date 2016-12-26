@@ -4,35 +4,33 @@ from urllib2 import urlopen
 from HTMLParser import HTMLParser
 from collections import defaultdict
 
-tags = defaultdict(int)
-domain = "http://ordergroove.com/company"
-html = urlopen(domain).read()
-
 class Parser(HTMLParser):
     def handle_starttag(self, tag, attrs):
         tags[tag] += 1
 
+i = 0
+total = 0
+tags = defaultdict(int)
+
+print '[Tiny Web Page Scraper]'
+
+domain = raw_input("Enter a target domain, for example: http://ordergroove.com/company ==> ")
+
+html = urlopen(domain).read()
 parser = Parser()
 parser.feed(html)
 
-i = 0
-total = 0
-sortedtags = sorted(tags, key=tags.get, reverse=True)
-
-for tag in sortedtags:
-  total += tags[tag]
-
-print '[TINY WEB PAGE SCRAPER]'
 print
-print 'TARGET DOMAIN ==>', domain
+print "Target Domain:", domain
 print
-print 'TOP 5 HTML ELEMENTS MOST USED:'
+print 'Html Tags Most Used:'
 
-for tag in sortedtags:
-  print tag, '==>', tags[tag]
-  i += 1
-  if i == 5:
-      break
+for tag in sorted(tags, key=tags.get, reverse=True):
+    total += tags[tag]
+    i += 1
+    if i <= 5:
+        print ('#%d: %s %s' % (i, tag, tags[tag]))
 
 print
-print 'HTML TOTAL ==>', total, 'ELEMENTS.'
+print 'Total: %d Html Elements.' % total
+print
