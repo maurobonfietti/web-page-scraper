@@ -17,19 +17,13 @@ html = urlopen(domain).read()
 parser = Parser()
 parser.feed(html)
 
-sortedtags = sorted(tags, key=tags.get, reverse=True)
+print ("Target Domain: '%s'.\n" % domain)
+print 'Html Tags Most Used:'
 
-for tag in sortedtags:
-  total += tags[tag]
+for tag in sorted(tags, key=tags.get, reverse=True):
+    total += tags[tag]
+    i += 1
+    if i <= 5:
+        print ('#%d: %s %s' % (i, tag, tags[tag]))
 
-print '[TINY WEB PAGE SCRAPER]'
-print 'TARGET DOMAIN ==>', domain
-print 'TOP 5 HTML ELEMENTS MOST USED:'
-
-for tag in sortedtags:
-  print tag, '==>', tags[tag]
-  i += 1
-  if i == 5:
-      break
-
-print 'HTML TOTAL ==>', total, 'ELEMENTS.'
+print '\nTotal:', total, 'Html Elements.'
