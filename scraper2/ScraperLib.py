@@ -2,19 +2,19 @@
 
 from HTMLParser import HTMLParser
 from collections import defaultdict
+from lxml import html
 from time import time
 from urllib2 import urlopen
-from lxml import html
 
 class Scraper(HTMLParser):
     def __init__(self):
         HTMLParser.__init__(self)
-        self.starttime = time()
-        self.domain = ""
         self.i = 0
         self.total = 0
-        self.tags = defaultdict(int)
+        self.domain = ""
         self.htmlstring = ""
+        self.starttime = time()
+        self.tags = defaultdict(int)
 
     def handle_starttag(self, tag, attrs):
         self.tags[tag] += 1
@@ -50,8 +50,6 @@ class Scraper(HTMLParser):
         print "\n[CHECKING SEO TAGS]"
         tree = html.fromstring(self.htmlstring)
         title = tree.find(".//title").text
-#        print title
-#        print len(title)
         if len(title) > 10 and len(title) < 70:
             print "\n[GOOD] The title tag is between 10 and 70 characters long."
         else:
