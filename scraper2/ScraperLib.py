@@ -19,9 +19,18 @@ class Scraper(HTMLParser):
     def handle_starttag(self, tag, attrs):
         self.tags[tag] += 1
 
+    def printtitle(self, text):
+        print('\n\x1b[1;37;44m' + text + '\x1b[0m')
+
+    def printresult(self, text):
+        print('\n\x1b[1;37;42m' + text + '\x1b[0m')
+
+    def printerror(self, text):
+        print('\n\x1b[2;30;41m' + text + '\x1b[0m')
+
     def start(self):
-        print '\n[Welcome!]'
-        print '\n[Tiny Web Page Scraper]'
+        self.printtitle('[Welcome!]')
+        self.printtitle('[Tiny Web Page Scraper]')
 
     def openurl(self):
         self.domain = raw_input("\nEnter a target domain, for example: http://ordergroove.com/company ==> ")
@@ -38,22 +47,22 @@ class Scraper(HTMLParser):
         self.htmlstring = file.read()
 
     def execute(self):
-        print '\nHtml Tags Most Used:'
+        self.printresult('Html Tags Most Used:')
         for tag in sorted(self.tags, key=self.tags.get, reverse=True):
             self.total += self.tags[tag]
             self.i += 1
             if self.i <= 5:
                 print ('#%d: %s %s' % (self.i, tag, self.tags[tag]))
-        print '\nTotal: %d Html Elements.' % self.total
+        self.printresult('Total: %d Html Elements.' % self.total)
 
     def checkseo(self):
-        print "\n[CHECKING SEO TAGS]"
+        self.printtitle('[CHECKING SEO TAGS]')
         tree = html.fromstring(self.htmlstring)
         title = tree.find(".//title").text
-        if len(title) > 10 and len(title) < 70:
-            print "\n[GOOD] The title tag is between 10 and 70 characters long."
+        if len(title) > 10 and len(title) < 700:
+            self.printresult('[GOOD] The title tag is between 10 and 70 characters long.')
         else:
-            print "\n[WARNING] The title tag is NOT between 10 and 70 characters long."
+            self.printerror('[ERROR] The title tag is NOT between 10 and 70 characters long.')
 
     def end(self):
-        print "\nScraped in '%.3f' seconds.\n" % (time()-self.starttime)
+        print "\nWeb Page Scraped in '%.3f' seconds.\n" % (time()-self.starttime)
