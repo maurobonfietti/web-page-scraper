@@ -4,37 +4,38 @@ from HTMLParser import HTMLParser
 from collections import defaultdict
 from time import time
 from urllib2 import urlopen
+from lxml import html
 
 class Scraper(HTMLParser):
     def __init__(self):
         HTMLParser.__init__(self)
-        self.start = time()
+        self.starttime = time()
         self.domain = ""
         self.i = 0
         self.total = 0
         self.tags = defaultdict(int)
-        self.html = ""
+        self.htmlstring = ""
 
     def handle_starttag(self, tag, attrs):
         self.tags[tag] += 1
 
-    def init(self):
+    def start(self):
         print '\n[Welcome!]'
         print '\n[Tiny Web Page Scraper]'
 
     def openurl(self):
-        self.domain = raw_input("Enter a target domain, for example: http://ordergroove.com/company ==> ")
+        self.domain = raw_input("\nEnter a target domain, for example: http://ordergroove.com/company ==> ")
         if not self.domain:
             self.domain = "http://ordergroove.com/company"
-        self.start = time()
+        self.starttime = time()
         print "\nTarget Domain:", self.domain
-        self.html = urlopen(self.domain).read()
+        self.htmlstring = urlopen(self.domain).read()
 
     def openhtmlfile(self):
-        self.start = time()
-        print "\nLoading Target Domain From File:", self.domain
+        self.starttime = time()
+        print "\nLoading HTML From File:"
         file = open('webpage.html', 'r')
-        self.html = file.read()
+        self.htmlstring = file.read()
 
     def execute(self):
         print '\nHtml Tags Most Used:'
@@ -44,15 +45,17 @@ class Scraper(HTMLParser):
             if self.i <= 5:
                 print ('#%d: %s %s' % (self.i, tag, self.tags[tag]))
         print '\nTotal: %d Html Elements.' % self.total
-        print "\nScraped in '%.3f' seconds.\n" % (time()-self.start)
 
     def checkseo(self):
-        import lxml.html
-        tree = lxml.html.fromstring(self.html)
+        print "\n[CHECKING SEO TAGS]"
+        tree = html.fromstring(self.htmlstring)
         title = tree.find(".//title").text
-        print title
-        print len(title)
+#        print title
+#        print len(title)
         if len(title) > 10 and len(title) < 70:
-            print "[GOOD] Title entre 10 y 70 chars..."
+            print "\n[GOOD] The title tag is between 10 and 70 characters long."
         else:
-            print "[WARNING] Title recomendado entre 10 y 70 chars..."
+            print "\n[WARNING] The title tag is NOT between 10 and 70 characters long."
+
+    def end(self):
+        print "\nScraped in '%.3f' seconds.\n" % (time()-self.starttime)

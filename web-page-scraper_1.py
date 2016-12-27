@@ -3,7 +3,10 @@
 from ScraperLib import Scraper
 
 scraper = Scraper()
-scraper.init()
+scraper.start()
 scraper.openurl()
-scraper.feed(scraper.html)
+#scraper.openhtmlfile()
+scraper.feed(scraper.htmlstring)
 scraper.execute()
+#scraper.checkseo()
+scraper.end()
