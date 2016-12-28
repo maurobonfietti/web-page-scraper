@@ -33,12 +33,7 @@ Total: 276 Html Elements.
 
 ## RUN TEST:
 
-TODO...
-
-
-## TEST SCRAPER2:
-
 ```
 $ cd scraper2/
-$ ./scraper.py
+$ ./scraperTests.py
 ```
