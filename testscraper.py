@@ -14,16 +14,22 @@ scraper.getstats()
 scraper.end()
 
 tree = html.fromstring(scraper.htmlstring)
-title = tree.find(".//title").text
+taghtml = tree.xpath('//html')
+tagbody = tree.xpath('//body')
+tagtitle = tree.find(".//title").text
 
 class ScraperTests(unittest.TestCase):
     def test1(self):
         self.failUnless(len(scraper.htmlstring) > 0)
     def test2(self):
-        self.failUnless(len(title) > 0)
+        self.failUnless(len(taghtml) > 0)
     def test3(self):
-        self.failUnless(len(scraper.tags) > 0)
+        self.failUnless(len(tagbody) > 0)
     def test4(self):
+        self.failUnless(len(tagtitle) > 0)
+    def test5(self):
+        self.failUnless(len(scraper.tags) > 0)
+    def test6(self):
         self.failUnless(scraper.total > 0)
 
 def main():
