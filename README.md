@@ -1,13 +1,13 @@
 # web-page-scraper
 
-A very tiny web page scraper :-)
+A very tiny web page scraper written in python :-)
 
 For a target domain, sum all the html elements and display the top 5 most used tags, and their respective counts.
 
 
 ## HOW TO USE:
 
-Download and run from the cli:
+Download the source code and then run from the cli:
 
 ```
 $ git clone https://github.com/maurobonfietti/web-page-scraper.git
@@ -18,7 +18,7 @@ $ ./scraper.py
 
 ## RUN TESTS:
 
-Run tests for the web page scraper:
+Run all tests for the web page scraper:
 
 ```
 $ ./testscraper.py
@@ -27,7 +27,7 @@ $ ./testscraper.py
 
 ## CLI OUTPUT EXAMPLE:
 
-Screen output example of the command line:
+View a screen output example of the command line:
 
 ```
 
@@ -53,7 +53,7 @@ Web Page Scraped in '0.860' seconds.
 
 ## SCRAPER EXTRA:
 
-Another scraper but in one file script version:
+Another scraper program but in one file script version ;-)
 
 ```
 $ cd tiny-web-page-scraper/
