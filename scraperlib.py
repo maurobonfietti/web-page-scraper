@@ -21,8 +21,12 @@ class Scraper(HTMLParser):
         print('\n\x1b[1;37;44m' + text + '\x1b[0m')
     def printresult(self, text):
         print('\n\x1b[1;37;42m' + text + '\x1b[0m')
+    def printsuccess(self, text):
+        print('\n\x1b[1;32;40m' + text + '\x1b[0m')
+    def printwarning(self, text):
+        print('\n\x1b[1;33;40m' + text + '\x1b[0m')
     def printerror(self, text):
-        print('\n\x1b[2;30;41m' + text + '\x1b[0m')
+        print('\n\x1b[1;31;40m' + text + '\x1b[0m')
     def start(self):
         self.printtitle('[Welcome!]')
         self.printtitle('[Tiny Web Page Scraper]')
@@ -51,11 +55,23 @@ class Scraper(HTMLParser):
         self.printresult('Total: %d Html Elements.' % self.total)
     def getseostats(self):
         self.printtitle('[Seo Information]')
+        self.checktitletag()
+        self.checkh1tag()
+    def checktitletag(self):
         tree = html.fromstring(self.htmlstring)
         title = tree.find(".//title").text
         if len(title) > 10 and len(title) < 700:
-            self.printresult('[GOOD] The title tag is between 10 and 70 characters long.')
+            self.printsuccess('[GOOD] The title tag is between 10 and 70 characters long.')
         else:
-            self.printerror('[ERROR] The title tag is NOT between 10 and 70 characters long.')
+            self.printwarning('[WARNING] The title tag is NOT between 10 and 70 characters long.')
+            print "Tag title:", title
+    def checkh1tag(self):
+        tree = html.fromstring(self.htmlstring)
+        tagh1 = tree.xpath('//h1')
+        if len(tagh1) == 1:
+            self.printsuccess('[GOOD] Only one <H1> tag per page.')
+        else:
+            self.printwarning('[WARNING] Use only one <h1> tag per page.')
+            print "Total Tags h1:", len(tagh1)
     def end(self):
         print "\nWeb Page Scraped in '%.3f' seconds.\n" % (time()-self.starttime)
