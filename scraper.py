@@ -1,12 +1,10 @@
 #!/usr/bin/python
 
-from ScraperLib import Scraper
+from scraperlib import Scraper
 
 scraper = Scraper()
 scraper.start()
-scraper.openurl()
-#scraper.openhtmlfile()
+scraper.openurl('http://ordergroove.com/company')
 scraper.feed(scraper.htmlstring)
 scraper.getstats()
-#scraper.getseostats()
 scraper.end()

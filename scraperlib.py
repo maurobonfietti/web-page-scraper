@@ -26,10 +26,13 @@ class Scraper(HTMLParser):
     def start(self):
         self.printtitle('[Welcome!]')
         self.printtitle('[Tiny Web Page Scraper]')
-    def openurl(self):
-        self.domain = raw_input("\nEnter a target domain, for example: http://ordergroove.com/company ==> ")
-        if not self.domain:
-            self.domain = "http://ordergroove.com/company"
+    def openurl(self, url):
+        if url:
+            self.domain = url
+        else:
+            self.domain = raw_input("\nEnter a target domain, for example: http://ordergroove.com/company ==> ")
+            if not self.domain:
+                self.domain = "http://ordergroove.com/company"
         self.starttime = time()
         print "\nTarget Domain:", self.domain
         self.htmlstring = urlopen(self.domain).read()

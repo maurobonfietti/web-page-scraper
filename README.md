@@ -7,18 +7,35 @@ For a target domain, sum all the html elements and display the top 5 most used t
 
 ## HOW TO USE:
 
+Download and run from the cli:
+
 ```
 $ git clone https://github.com/maurobonfietti/web-page-scraper.git
 $ cd web-page-scraper/
-$ ./web-page-scraper.py
+$ ./scraper.py
 ```
 
-## OUTPUT:
 
-Screen output example:
+## RUN TESTS:
+
+Run tests for the web page scraper:
 
 ```
-Target Domain: 'http://ordergroove.com/company'.
+$ ./testscraper.py
+```
+
+
+## CLI OUTPUT EXAMPLE:
+
+Screen output example of the command line:
+
+```
+
+[Welcome!]
+
+[Tiny Web Page Scraper]
+
+Target Domain: http://ordergroove.com/company
 
 Html Tags Most Used:
 #1: div 129
@@ -28,12 +45,17 @@ Html Tags Most Used:
 #5: link 10
 
 Total: 276 Html Elements.
-```
 
-
-## RUN TEST:
+Web Page Scraped in '0.860' seconds.
 
 ```
-$ cd scraper2/
-$ ./scraperTests.py
+
+
+## SCRAPER EXTRA:
+
+Another scraper but in one file script version:
+
+```
+$ cd tiny-web-page-scraper/
+$ ./web-page-scraper.py
 ```
