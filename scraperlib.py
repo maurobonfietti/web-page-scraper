@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import argparse
 from HTMLParser import HTMLParser
 from collections import defaultdict
 from lxml import html
@@ -28,6 +29,9 @@ class Scraper(HTMLParser):
     def printerror(self, text):
         print('\n\x1b[1;31;40m' + text + '\x1b[0m')
     def start(self):
+        parser = argparse.ArgumentParser(description='A very tiny web page scraper written in Python :-)')
+        parser.add_argument('-v','--version', action='version', version='%(prog)s version 0.1.2')
+        parser.parse_args()
         self.printtitle('[Welcome!]')
         self.printtitle('[Tiny Web Page Scraper]')
     def openurl(self, url):

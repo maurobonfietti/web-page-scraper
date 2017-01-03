@@ -5,8 +5,9 @@ from lxml import html
 import unittest
 
 scraper = Scraper()
-scraper.start()
-scraper.openurl('http://ordergroove.com/company')
+#scraper.start()
+#scraper.openurl('http://ordergroove.com/company')
+scraper.openurl('http://localhost')
 #scraper.openhtmlfile()
 scraper.feed(scraper.htmlstring)
 scraper.getstats()
