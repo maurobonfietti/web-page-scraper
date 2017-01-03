@@ -41,16 +41,21 @@ class Scraper(HTMLParser):
             self.domain = raw_input("\nEnter a target domain, for example: http://ordergroove.com/company ==> ")
             if not self.domain:
                 self.domain = "http://ordergroove.com/company"
-        self.starttime = time()
-        print "\nTarget Domain:", self.domain
-        try:
-            self.htmlstring = urlopen(self.domain).read()
-        except HTTPError as e:
-            self.printerror("[ERROR] The server couldn't fulfill the request.")
-            self.printerror('Error Code: %s. Error Reason: %s.' % (e.code, e.reason))
-        except URLError as e:
-            self.printerror("[ERROR] We failed to reach a server.")
-            self.printerror('Error Reason: %s.' % e.reason)
+        while True:
+            self.starttime = time()
+            print "\nTarget Domain:", self.domain
+            try:
+                self.htmlstring = urlopen(self.domain).read()
+                break
+            except HTTPError as e:
+                self.printerror("[ERROR] The server couldn't fulfill the request.")
+                self.printerror('Error Code: %s. Error Reason: %s.' % (e.code, e.reason))
+            except URLError as e:
+                self.printerror("[ERROR] We failed to reach a server.")
+                self.printerror('Error Reason: %s.' % e.reason)
+            self.domain = raw_input("\nUPS! Failed to get the html page. Please, retry again with another url address: ")
+            if not self.domain:
+                self.domain = "http://ordergroove.com/company"
     def openhtmlfile(self):
         self.starttime = time()
         print "\nLoading HTML From File:"
