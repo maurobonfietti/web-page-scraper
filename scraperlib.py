@@ -1,10 +1,11 @@
 #!/usr/bin/python
 
-from HTMLParser import HTMLParser
-from collections import defaultdict
+import argparse
 from lxml import html
 from time import time
-from urllib2 import urlopen
+from HTMLParser import HTMLParser
+from collections import defaultdict
+from urllib2 import urlopen, URLError, HTTPError
 
 class Scraper(HTMLParser):
     def __init__(self):
@@ -28,6 +29,9 @@ class Scraper(HTMLParser):
     def printerror(self, text):
         print('\n\x1b[1;31;40m' + text + '\x1b[0m')
     def start(self):
+        parser = argparse.ArgumentParser(description='A very tiny web page scraper written in Python :-)')
+        parser.add_argument('-v', '--version', action='version', version='%(prog)s version 0.1.2')
+        parser.parse_args()
         self.printtitle('[Welcome!]')
         self.printtitle('[Tiny Web Page Scraper]')
     def openurl(self, url):
@@ -37,13 +41,25 @@ class Scraper(HTMLParser):
             self.domain = raw_input("\nEnter a target domain, for example: http://ordergroove.com/company ==> ")
             if not self.domain:
                 self.domain = "http://ordergroove.com/company"
-        self.starttime = time()
-        print "\nTarget Domain:", self.domain
-        self.htmlstring = urlopen(self.domain).read()
+        while True:
+            self.starttime = time()
+            print "\nTarget Domain:", self.domain
+            try:
+                self.htmlstring = urlopen(self.domain).read()
+                break
+            except HTTPError as e:
+                self.printerror("[ERROR] The server couldn't fulfill the request.")
+                self.printerror('Error Code: %s. Error Reason: %s.' % (e.code, e.reason))
+            except URLError as e:
+                self.printerror("[ERROR] We failed to reach a server.")
+                self.printerror('Error Reason: %s.' % e.reason)
+            self.domain = raw_input("\nUPS! Failed to get the html page. Please, retry again with another url address: ")
+            if not self.domain:
+                self.domain = "http://ordergroove.com/company"
     def openhtmlfile(self):
         self.starttime = time()
         print "\nLoading HTML From File:"
-        file = open('webpage.html', 'r')
+        file = open('htmlfile', 'r')
         self.htmlstring = file.read()
     def getstats(self):
         self.printresult('Html Tags Most Used:')
