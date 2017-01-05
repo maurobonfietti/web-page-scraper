@@ -59,7 +59,7 @@ class Scraper(HTMLParser):
     def openhtmlfile(self):
         self.starttime = time()
         print "\nLoading HTML From File:"
-        file = open('htmlfile', 'r')
+        file = open('html.file', 'r')
         self.htmlstring = file.read()
     def getstats(self):
         self.printresult('Html Tags Most Used:')

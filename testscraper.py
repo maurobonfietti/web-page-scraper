@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 from scraperlib import Scraper
-from lxml import html
 import unittest
 
 scraper = Scraper()
@@ -15,26 +14,15 @@ scraper.openhtmlfile()
 scraper.feed(scraper.htmlstring)
 scraper.getstats()
 #scraper.getseostats()
-scraper.end()
-
-tree = html.fromstring(scraper.htmlstring)
-taghtml = tree.xpath('//html')
-tagbody = tree.xpath('//body')
-tagtitle = tree.find(".//title").text
+#scraper.end()
 
 class ScraperTests(unittest.TestCase):
-    def test1(self):
+    def test_len_html_string(self):
         self.failUnless(len(scraper.htmlstring) > 0)
-    def test2(self):
-        self.failUnless(len(taghtml) > 0)
-    def test3(self):
-        self.failUnless(len(tagbody) > 0)
-    def test4(self):
-        self.failUnless(len(tagtitle) > 0)
-    def test5(self):
+    def test_len_tags(self):
         self.failUnless(len(scraper.tags) > 0)
-    def test6(self):
-        self.failUnless(scraper.total > 0)
+    def test_total_tags(self):
+        self.assertEqual(scraper.total, 256)
 
 def main():
     unittest.main()
