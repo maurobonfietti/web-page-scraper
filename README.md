@@ -34,18 +34,18 @@ View a screen output example of the command line:
 
 [Tiny Web Page Scraper]
 
-Target Domain: http://ordergroove.com/company
+Target Domain: https://github.com/
 
 Html Tags Most Used:
-#1: div 129
-#2: a 38
-#3: li 35
-#4: script 18
-#5: link 10
+#1: meta 52
+#2: div 49
+#3: a 34
+#4: link 20
+#5: li 12
 
-Total: 276 Html Elements.
+Total: 256 Html Elements.
 
-Web Page Scraped in '0.860' seconds.
+Web Page Scraped in '0.915' seconds.
 ```
 
 

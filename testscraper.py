@@ -5,13 +5,13 @@ from lxml import html
 import unittest
 
 scraper = Scraper()
-scraper.openurl('http://ordergroove.com/company')
-#scraper.openurl('http://ordergroove.com/404-1234567890-not-exits')
+#scraper.openurl('https://google.com.ar/')
+#scraper.openurl('http://google.com/404-1234567890-not-exits')
 #scraper.openurl('https://www.microsoft.com/es-ar/')
 #scraper.openurl('http://example.com')
 #scraper.openurl('http://localhost')
 #scraper.openurl('')
-#scraper.openhtmlfile()
+scraper.openhtmlfile()
 scraper.feed(scraper.htmlstring)
 scraper.getstats()
 #scraper.getseostats()

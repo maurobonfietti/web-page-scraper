@@ -38,9 +38,9 @@ class Scraper(HTMLParser):
         if url:
             self.domain = url
         else:
-            self.domain = raw_input("\nEnter a target domain, for example: http://ordergroove.com/company ==> ")
+            self.domain = raw_input("\nEnter a target domain, for example: https://github.com/ ==> ")
             if not self.domain:
-                self.domain = "http://ordergroove.com/company"
+                self.domain = "https://github.com/"
         while True:
             self.starttime = time()
             print "\nTarget Domain:", self.domain
@@ -55,7 +55,7 @@ class Scraper(HTMLParser):
                 self.printerror('Error Reason: %s.' % e.reason)
             self.domain = raw_input("\nUPS! Failed to get the html page. Please, retry again with another url address: ")
             if not self.domain:
-                self.domain = "http://ordergroove.com/company"
+                self.domain = "https://github.com/"
     def openhtmlfile(self):
         self.starttime = time()
         print "\nLoading HTML From File:"

@@ -11,7 +11,7 @@ class Parser(HTMLParser):
 i = 0
 total = 0
 tags = defaultdict(int)
-domain = "http://ordergroove.com/company"
+domain = "https://github.com/"
 
 html = urlopen(domain).read()
 parser = Parser()
