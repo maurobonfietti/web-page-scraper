@@ -29,18 +29,16 @@ class Scraper(HTMLParser):
     def printerror(self, text):
         print('\n\x1b[1;31;40m' + text + '\x1b[0m')
     def start(self):
-        parser = argparse.ArgumentParser(description='A very tiny web page scraper written in Python :-)')
+        parser = argparse.ArgumentParser(description='A very tiny web page scraper written in Python.')
         parser.add_argument('-v', '--version', action='version', version='%(prog)s version 0.1.2')
-        parser.parse_args()
+        parser.add_argument('-u', '--url', type=str, help='target domain url, for example: https://github.com/')
+        args = parser.parse_args()
+        self.domain = args.url
         self.printtitle('[Welcome!]')
         self.printtitle('[Tiny Web Page Scraper]')
-    def openurl(self, url):
-        if url:
-            self.domain = url
-        else:
-            self.domain = raw_input("\nEnter a target domain, for example: https://github.com/ ==> ")
-            if not self.domain:
-                self.domain = "https://github.com/"
+    def openurl(self):
+        if not self.domain:
+            self.domain = "https://github.com/"
         while True:
             self.starttime = time()
             print "\nTarget Domain:", self.domain

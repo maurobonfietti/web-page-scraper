@@ -4,7 +4,7 @@ from scraperlib import Scraper
 
 scraper = Scraper()
 scraper.start()
-scraper.openurl('https://github.com/')
+scraper.openurl()
 scraper.feed(scraper.htmlstring)
 scraper.getstats()
 scraper.end()
