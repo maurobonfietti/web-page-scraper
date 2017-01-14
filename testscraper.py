@@ -4,16 +4,13 @@ from scraperlib import Scraper
 import unittest
 
 scraper = Scraper()
-#scraper.openurl()
-scraper.openhtmlfile()
-scraper.feed(scraper.htmlstring)
-scraper.getstats()
-#scraper.getseostats()
-#scraper.end()
+scraper.open_html_file()
+scraper.feed(scraper.html_string)
+scraper.get_stats()
 
 class ScraperTests(unittest.TestCase):
     def test_len_html_string(self):
-        self.failUnless(len(scraper.htmlstring) > 0)
+        self.failUnless(len(scraper.html_string) > 0)
     def test_len_tags(self):
         self.failUnless(len(scraper.tags) > 0)
     def test_total_tags(self):
